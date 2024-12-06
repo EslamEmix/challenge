@@ -1,7 +1,7 @@
 class OrderModel {
   final String id;
   final bool isActive;
-  final double price;
+  final String price;
   final String company;
   final String picture;
   final String buyer;
@@ -25,7 +25,7 @@ class OrderModel {
     return OrderModel(
       id: json['id'] as String,
       isActive: json['isActive'] as bool,
-      price: double.parse(json['price'].replaceAll(RegExp(r'[^0-9.]'), '')),
+      price: json['price'],
       company: json['company'] as String,
       picture: json['picture'] as String,
       buyer: json['buyer'] as String,
