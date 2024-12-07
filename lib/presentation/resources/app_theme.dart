@@ -4,7 +4,7 @@ final ThemeData lightTheme = ThemeData(
   brightness: Brightness.light,
   primaryColor: Colors.blueAccent,
   hintColor: Colors.teal,
-  fontFamily: "dd",
+  fontFamily: "Roboto",
   textTheme: const TextTheme(
     bodyLarge: TextStyle(
         fontSize: 28, fontWeight: FontWeight.bold, color: Colors.black),
