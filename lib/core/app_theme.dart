@@ -31,7 +31,12 @@ final ThemeData darkTheme = ThemeData(
   brightness: Brightness.dark,
   primaryColor: Colors.teal,
   scaffoldBackgroundColor: Colors.black,
+  iconTheme: const IconThemeData(color: AppColors.contentColorWhite),
   textTheme: const TextTheme(
+    headlineLarge: TextStyle(
+        fontSize: 28,
+        fontWeight: FontWeight.bold,
+        color: AppColors.mainTextColor1),
     displayLarge: TextStyle(
         fontSize: 28, fontWeight: FontWeight.bold, color: Colors.white),
     bodyLarge: TextStyle(fontSize: 16, color: Colors.white70),
@@ -39,12 +44,3 @@ final ThemeData darkTheme = ThemeData(
         fontSize: 16, fontWeight: FontWeight.normal, color: Colors.white70),
   ),
 );
-
-class ThemeNotifier extends ValueNotifier<ThemeMode> {
-  ThemeNotifier() : super(ThemeMode.light);
-
-  void toggleTheme() {
-    value = value == ThemeMode.light ? ThemeMode.dark : ThemeMode.light;
-    notifyListeners();
-  }
-}

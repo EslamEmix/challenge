@@ -14,8 +14,9 @@ dependencies:
   fl_chart: ^0.69.2
   intl: ^0.20.1
   easy_sidemenu: ^0.6.0
-  rive: ^0.13.20
-  
+  path_provider: ^2.1.5
+  responsive_framework: ^1.5.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -26,17 +27,19 @@ flutter:
   fonts:
     - family: Roboto
       fonts:
-        - asset: assets/fonts/Roboto/Roboto-Regular.ttf
-        - asset: assets/fonts/Roboto/Roboto-Light.ttf
+        - asset: fonts/Roboto/Roboto-Regular.ttf
+        - asset: fonts/Roboto/Roboto-Light.ttf
           weight: 300
-        - asset: assets/fonts/Roboto/Roboto-Medium.ttf
+        - asset: fonts/Roboto/Roboto-Medium.ttf
           weight: 500
-        - asset: assets/fonts/Roboto/Roboto-Bold.ttf
+        - asset: fonts/Roboto/Roboto-Bold.ttf
           weight: 800
-        - asset: assets/fonts/Roboto/Roboto-Italic.ttf
+        - asset: fonts/Roboto/Roboto-Italic.ttf
           style: italic
 assets:
   - assets/json/orders.json
-  - assets/images/icons/
-  - assets/rive
+  - assets/images/icons/ic_avg.png
+  - assets/images/icons/ic_returned.png
+  - assets/images/icons/ic_orders.png
+
 

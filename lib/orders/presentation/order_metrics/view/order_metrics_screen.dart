@@ -1,4 +1,5 @@
 import 'package:challenge/core/app_resources.dart';
+import 'package:challenge/helpers/screen_size.dart';
 import 'package:challenge/orders/domain/use_case/orders_use_case.dart';
 import 'package:challenge/orders/presentation/order_metrics/bloc/order_metrics_bloc.dart';
 import 'package:flutter/material.dart';
@@ -45,41 +46,45 @@ class _OrderMetricsScreenWithBlocState
           if (state is OrderMetricsSuccessState) {
             return Center(
               child: Container(
-                constraints: const BoxConstraints(minWidth: 250, maxWidth: 600),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    InfoCard(
-                      title: "Orders Total Count",
-                      info: "${state.ordersMetricsEntity.ordersTotalCount}",
-                      iconPath: AppRes.ordersImage,
-                    ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          child: InfoCard(
-                            title: "Returns",
-                            info:
-                                "${state.ordersMetricsEntity.numberOfReturns}",
-                            iconPath: AppRes.returnedImage,
-                            cardColor: AppColors.redBackground,
+                constraints: BoxConstraints(
+                    minWidth: ScreenSize.widthScale(context, 50),
+                    maxWidth: ScreenSize.widthScale(context, 200)),
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      InfoCard(
+                        title: "Orders Total Count",
+                        info: "${state.ordersMetricsEntity.ordersTotalCount}",
+                        iconPath: AppRes.ordersImage,
+                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: InfoCard(
+                              title: "Returns",
+                              info:
+                                  "${state.ordersMetricsEntity.numberOfReturns}",
+                              iconPath: AppRes.returnedImage,
+                              cardColor: AppColors.redBackground,
+                            ),
                           ),
-                        ),
-                        Expanded(
-                          child: InfoCard(
-                            title: "Average Price",
-                            info:
-                                "${state.ordersMetricsEntity.averagePrice.toStringAsFixed(2)} \$",
-                            iconPath: AppRes.avgImage,
-                            cardColor: AppColors.greenBackground,
-                          ),
-                        )
-                      ],
-                    ),
-                  ],
+                          Expanded(
+                            child: InfoCard(
+                              title: "Average Price",
+                              info:
+                                  "${state.ordersMetricsEntity.averagePrice.toStringAsFixed(2)} \$",
+                              iconPath: AppRes.avgImage,
+                              cardColor: AppColors.greenBackground,
+                            ),
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             );
@@ -110,7 +115,7 @@ class InfoCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 250,
+        height: ScreenSize.widthScale(context, 80),
         margin: const EdgeInsets.all(5),
         decoration: BoxDecoration(
             color: cardColor,
