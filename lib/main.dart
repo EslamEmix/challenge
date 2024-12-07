@@ -1,5 +1,5 @@
 import 'package:challenge/orders/presentation/order_graph/view/order_graph_screen.dart';
-import 'package:challenge/orders/presentation/order_metrics/view/order_metrics_screen.dart';
+import 'package:challenge/presentation/resources/app_theme.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -11,9 +11,10 @@ class FlapKapApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
+      theme: lightTheme,
       debugShowCheckedModeBanner: false,
-      home: OrderGraphScreen(),
+      home: const OrderGraphScreen(),
     );
   }
 }
