@@ -2,7 +2,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import '../../../../presentation/resources/app_colors.dart';
+import '../../../../core/app_colors.dart';
 
 class LineGraphWidget extends StatelessWidget {
   const LineGraphWidget({super.key, required this.spots});
@@ -11,11 +11,12 @@ class LineGraphWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AspectRatio(
-      aspectRatio: 2.2,
-      child: Stack(children: [
+    return LineGraphView(spots: spots);
+    return Container(
+      constraints: const BoxConstraints(minWidth: 500),
+      color: Colors.red,
+      child: Stack(fit: StackFit.expand, children: [
         Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             const Text(
               'Monthly Sales',
@@ -27,7 +28,10 @@ class LineGraphWidget extends StatelessWidget {
               ),
               textAlign: TextAlign.center,
             ),
-            Expanded(child: LineGraphView(spots: spots)),
+            Expanded(
+                child: Container(
+                    constraints: const BoxConstraints(minWidth: 500),
+                    child: LineGraphView(spots: spots))),
           ],
         )
       ]),
@@ -81,8 +85,9 @@ class _LineGraphViewState extends State<LineGraphView> {
           ),
         ),
         topTitles: const AxisTitles(
-          sideTitles: SideTitles(showTitles: false),
-        ),
+            sideTitles: SideTitles(showTitles: false),
+            axisNameSize: 80,
+            axisNameWidget: Text("")),
         rightTitles: const AxisTitles(
             sideTitles: SideTitles(showTitles: false),
             axisNameSize: 80,

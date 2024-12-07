@@ -13,7 +13,9 @@ dependencies:
   flutter_bloc: ^8.1.6
   fl_chart: ^0.69.2
   intl: ^0.20.1
-
+  easy_sidemenu: ^0.6.0
+  rive: ^0.13.20
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -35,4 +37,6 @@ flutter:
           style: italic
 assets:
   - assets/json/orders.json
+  - assets/images/icons/
+  - assets/rive
 

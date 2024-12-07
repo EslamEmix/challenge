@@ -1,4 +1,5 @@
 import 'package:challenge/orders/presentation/order_graph/bloc/order_graph_bloc.dart';
+import 'package:challenge/core/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fl_chart/fl_chart.dart';
@@ -42,12 +43,28 @@ class _OrderGraphScreenWithBlocState extends State<OrderGraphScreenWithBloc> {
       body: BlocConsumer<OrderGraphBloc, OrderGraphState>(
         builder: (context, state) {
           if (state is OrderGraphSuccessState) {
-            return LineGraphWidget(spots: spots);
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Container(
+                  width: double.infinity,
+                  color: AppColors.menuBackground,
+                  padding: const EdgeInsets.all(15),
+                  child: Center(
+                    child: Text(
+                      "Year 2021 Orders Graph",
+                      style: Theme.of(context).textTheme.headlineLarge,
+                    ),
+                  ),
+                ),
+                Expanded(child: LineGraphWidget(spots: spots)),
+              ],
+            );
           }
           if (state is OrderGraphLoadingState) {
             return const CircularProgressIndicator();
           } else {
-            return const Placeholder();
+            return const SizedBox();
           }
         },
         listener: (context, state) {

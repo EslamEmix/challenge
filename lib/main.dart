@@ -1,20 +1,26 @@
 import 'package:challenge/orders/presentation/order_graph/view/order_graph_screen.dart';
-import 'package:challenge/presentation/resources/app_theme.dart';
+import 'package:challenge/presentation/home/view/home_screen.dart';
+import 'package:challenge/core/app_theme.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const FlapKapApp());
+  runApp(FlapKapApp());
 }
 
 class FlapKapApp extends StatelessWidget {
-  const FlapKapApp({super.key});
+  FlapKapApp({super.key});
+  final ThemeNotifier themeNotifier = ThemeNotifier();
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: lightTheme,
-      debugShowCheckedModeBanner: false,
-      home: const OrderGraphScreen(),
-    );
+    return ValueListenableBuilder<ThemeMode>(
+        valueListenable: themeNotifier,
+        builder: (context, mode, child) {
+          return MaterialApp(
+            theme: lightTheme,
+            debugShowCheckedModeBanner: false,
+            home: const HomeScreen(),
+          );
+        });
   }
 }
