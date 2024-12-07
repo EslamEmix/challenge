@@ -1,8 +1,9 @@
 import 'package:challenge/orders/data/data_source/orders_data_source_impl.dart';
 import 'package:challenge/orders/data/model/order.dart';
-import 'package:challenge/orders/domain/entity/order_chart_entity.dart';
+import 'package:challenge/orders/domain/entity/order_graph_entity.dart';
 import 'package:challenge/orders/domain/repository/orders_repository.dart';
 import 'package:challenge/orders/presentation/order_metrics/view/order_metrics_screen.dart';
+import 'package:intl/intl.dart';
 
 import '../../domain/entity/orders_metrics_entity.dart';
 import '../data_source/orders_data_source.dart';
@@ -49,14 +50,17 @@ class OrdersRepositoryLocal implements OrdersRepository {
   Future<OrderGraphEntity> getOrdersGraph() async {
     List<OrderModel> ordersList = await orderDataSource.fetchOrders();
     Map<DateTime, int> orderGraphData = {};
-
+    OrderGraphEntity orderGraphEntity = OrderGraphEntity({});
     for (var order in ordersList) {
       DateTime date = order.registered;
       DateTime monthOnly = DateTime(date.year, date.month);
       orderGraphData.update(monthOnly, (count) => count + 1, ifAbsent: () => 1);
     }
     orderGraphData = _orderMapByDateTime(orderGraphData);
-    return OrderGraphEntity(orderGraphData);
+    orderGraphData.forEach((date, count) {
+      orderGraphEntity.orderGraphData[date.month] = count;
+    });
+    return orderGraphEntity;
   }
 
   Map<DateTime, int> _orderMapByDateTime(Map<DateTime, int> inputMap) {

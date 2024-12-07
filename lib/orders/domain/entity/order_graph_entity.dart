@@ -1,5 +1,5 @@
 class OrderGraphEntity {
-  final Map<DateTime, int> orderGraphData;
+  final Map<int, int> orderGraphData;
 
   OrderGraphEntity(this.orderGraphData);
 }

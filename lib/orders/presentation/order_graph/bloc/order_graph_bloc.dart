@@ -1,4 +1,4 @@
-import 'package:challenge/orders/domain/entity/order_chart_entity.dart';
+import 'package:challenge/orders/domain/entity/order_graph_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
