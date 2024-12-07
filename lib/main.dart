@@ -1,3 +1,4 @@
+import 'package:challenge/orders/presentation/order_graph/view/order_graph_screen.dart';
 import 'package:challenge/orders/presentation/order_metrics/view/order_metrics_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +13,7 @@ class FlapKapApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: OrderMetricsScreen(),
+      home: OrderGraphScreen(),
     );
   }
 }

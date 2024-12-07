@@ -1,5 +1,6 @@
 import 'package:challenge/orders/data/data_source/orders_data_source_impl.dart';
 import 'package:challenge/orders/data/model/order.dart';
+import 'package:challenge/orders/domain/entity/order_chart_entity.dart';
 import 'package:challenge/orders/domain/repository/orders_repository.dart';
 import 'package:challenge/orders/presentation/order_metrics/view/order_metrics_screen.dart';
 
@@ -8,8 +9,10 @@ import '../data_source/orders_data_source.dart';
 
 class OrdersRepositoryLocal implements OrdersRepository {
   @override
+  OrdersDataSource get orderDataSource => OrdersDataSourceLocal();
+
+  @override
   Future<OrdersMetricsEntity> getOrdersMetrics() async {
-    OrdersDataSource orderDataSource = OrdersDataSourceLocal();
     List<OrderModel> ordersList = await orderDataSource.fetchOrders();
     int ordersTotalCount = ordersList.length;
     double averagePrice = _calculateAveragePrice(ordersList);
@@ -40,5 +43,32 @@ class OrdersRepositoryLocal implements OrdersRepository {
         ordersList.where((order) => order.status == 'RETURNED').length;
 
     return numberOfReturns;
+  }
+
+  @override
+  Future<OrderGraphEntity> getOrdersGraph() async {
+    List<OrderModel> ordersList = await orderDataSource.fetchOrders();
+    Map<DateTime, int> orderGraphData = {};
+
+    for (var order in ordersList) {
+      DateTime date = order.registered;
+      DateTime monthOnly = DateTime(date.year, date.month);
+      orderGraphData.update(monthOnly, (count) => count + 1, ifAbsent: () => 1);
+    }
+    orderGraphData = _orderMapByDateTime(orderGraphData);
+    return OrderGraphEntity(orderGraphData);
+  }
+
+  Map<DateTime, int> _orderMapByDateTime(Map<DateTime, int> inputMap) {
+    // Convert map entries to a list
+    List<MapEntry<DateTime, int>> entries = inputMap.entries.toList();
+
+    // Sort the list based on DateTime keys
+    entries.sort((a, b) => a.key.compareTo(b.key));
+
+    // Convert the sorted list back to a map
+    Map<DateTime, int> orderedMap = Map.fromEntries(entries);
+
+    return orderedMap;
   }
 }

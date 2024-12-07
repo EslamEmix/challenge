@@ -26,7 +26,7 @@ class _MetricsScreenWithBlocState extends State<MetricsScreenWithBloc> {
   late final OrdersUseCase ordersUseCase;
   @override
   void initState() {
-    ordersUseCase = OrdersUseCase();
+    ordersUseCase = OrdersUseCaseWithBloc();
     ordersUseCase.getOrdersMetrics(context);
     super.initState();
   }
@@ -37,12 +37,19 @@ class _MetricsScreenWithBlocState extends State<MetricsScreenWithBloc> {
       body: BlocConsumer<OrderMetricsBloc, OrderMetricsState>(
         builder: (context, state) {
           if (state is OrderMetricsSuccessState) {
-            return Column(
-              children: [
-                Text("${state.ordersMetricsEntity.ordersTotalCount}"),
-                Text("${state.ordersMetricsEntity.numberOfReturns}"),
-                Text(state.ordersMetricsEntity.averagePrice.toStringAsFixed(2)),
-              ],
+            return Center(
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text("${state.ordersMetricsEntity.ordersTotalCount}"),
+                  VerticalDivider(),
+                  Text("${state.ordersMetricsEntity.numberOfReturns}"),
+                  VerticalDivider(),
+                  Text(state.ordersMetricsEntity.averagePrice
+                      .toStringAsFixed(2)),
+                ],
+              ),
             );
           }
           if (state is OrderMetricsLoadingState) {
